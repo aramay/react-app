@@ -1,33 +1,30 @@
 import React from 'react';
 
 class App extends React.Component {
-    render() {
-        return (
-            <Title text='this'/>
-        )
+
+    constructor (){
+        super()
+        this.state = {currentEvent: '-----'}
+        this.update = this.update.bind(this)
     }
-}
 
-const Title = (props) => {
-    let x = props
-    console.log(x)
+    update (e) {
+        this.setState({currentEvent: e.type})
+    }
+    render() {
+        console.log(this)
+        return (
+            <div>
+                <h1>hello</h1>
+                <textarea
+                    onKeyPress={this.update}
+                    cols="30"
+                    rows="20" >
+                </textarea>
+                <h2>{this.state.currentEvent}</h2>
 
-    return (
-        <h1>title: {props.text}</h1>
-    )
-}
-
-Title.propTypes = {
-    // text: React.PropTypes.string.isRequired
-    text (props, propName, component){
-        console.log(props) // returns an Object {}
-        console.log(propName) // returns text as propName = text
-        if(!(propName in props)){
-            return new Error (`missing ${propName} in component => ${component}`)
-        }
-        if(props[propName].length < 5){
-            return new Error (`too short propName ${propName} in component => ${component}`)
-        }
+            </div>
+        )
     }
 }
 
