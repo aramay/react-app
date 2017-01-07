@@ -1,31 +1,71 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 class App extends React.Component {
-
-    constructor (){
-        super()
-        this.state = {currentEvent: '-----'}
+    constructor () {
+        super();
+        this.state = {
+            val: 0,
+            x: 2
+        }
         this.update = this.update.bind(this)
     }
 
-    update (e) {
-        this.setState({currentEvent: e.type})
+    update () {
+        this.setState({val: this.state.val + 1})
     }
-    render() {
-        console.log(this)
+    componentWillMount(){
+        console.log("will mount")
+    }
+
+    componentDidMount(){
+        console.log("did mount")
+    }
+    componentWillUnmount() {
+        console.log("componentWillUnMount")
+    }
+    render () {
+        console.log("render")
         return (
             <div>
                 <h1>hello</h1>
-                <textarea
-                    onKeyPress={this.update}
-                    cols="30"
-                    rows="20" >
-                </textarea>
-                <h2>{this.state.currentEvent}</h2>
-
+                <button onClick={this.update}>
+                Press to Add</button>
+                <p>{this.state.val}</p>
             </div>
         )
     }
 }
 
-export default App
+
+class Wrapper extends React.Component {
+    
+    mount() {
+        ReactDOM.render(
+            <App />,
+            document.getElementById('a')
+        )
+    }
+    unmount(){
+        // console.log("un mount method called")
+        ReactDOM.unmountComponentAtNode(document.getElementById('a'))
+    }
+    render() {
+        console.log(this)
+        return (
+            <div>
+                <button 
+                    onClick={this.mount}>Mount
+                </button>
+                
+                <button 
+                    onClick={this.unmount}>UnMount
+                </button>
+
+                <div id="a"></div>
+            </div>
+        )
+    }
+}
+
+export default Wrapper
