@@ -1,0 +1,1 @@
+Higher order component does not makes sense
