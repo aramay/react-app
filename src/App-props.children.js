@@ -11,7 +11,7 @@ const Button = (props) => {
     let x = props;
     console.log(x)
 
-    return (
+    return (``
         <button>{props.children}</button>
     )
 }
